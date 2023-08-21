@@ -16,7 +16,7 @@ class Cart:
         else:
             self.products[product] = quantity
 
-    def Total(self):
+    def total(self):
         summa = 0
         for product, quantity in self.products.items():
             summa += product.price * quantity
