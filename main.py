@@ -1,3 +1,7 @@
+from product import Product
+from cart import Cart
+
+
 pr_1 = Product('orange', 2, 'fresh orange')
 pr_2 = Product('tea', 10, 'black ceylon loose leaf tea')
 pr_3 = Product('kola', 8, 'light refreshing drink')
