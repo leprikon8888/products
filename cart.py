@@ -1,9 +1,8 @@
 from product import Product
 class Cart:
-
     def __init__(self):
-        self.products = {}
-
+        self.products = []
+        self.quantities = []
     def add_product(self, product: Product, quantity: int | float):
         if not isinstance(product, Product):
             raise TypeError('Error in Product datatype')
@@ -11,20 +10,40 @@ class Cart:
             raise TypeError('Error in quantity of Product')
         elif quantity <= 0:
             raise ValueError('Quantity must be > 0. But less or equal got.')
-        elif product in self.products:
-            self.products[product] += quantity
-        else:
-            self.products[product] = quantity
+        self.products.append(product)
+        self.quantities.append(quantity)
+
+
+
+
 
     def total(self):
         summa = 0
-        for product, quantity in self.products.items():
+        for product, quantity in zip(self.product, self.quantities):
             summa += product.price * quantity
         return summa
 
-    def __getitem__(self, item):
+    def __getitem__(self, index):
+        if isinstance(index, int):
+            if 0 <= index < len(self.products):
+                return self.products[index]
+            raise IndexError("Index out of range")
 
-        ...
+        if isinstance(index, slice):
+            start = 0 if index.start is None else index.start
+            stop = len(self.products) if index.stop is None else index.stop
+            step = 1 if index.step is None else index.step
+
+            tmp = []
+            if start < 0 and stop > len(self.products):
+                raise IndexError
+            for i in range(start, stop, step):
+                tmp.append(self.products[i])
+            return tmp
+
+
+
+
 
     def __len__(self):
         return len(self.products)
@@ -33,7 +52,7 @@ class Cart:
     def __str__(self):
 
         res = ''
-
-        for product, quantity in self.products.items():
+        for product, quantity in zip(self.products, self.quantities):
             res += f'{product} x {quantity} = {product.price * quantity}$ \n'
         return res
+

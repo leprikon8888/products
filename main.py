@@ -9,7 +9,20 @@ if __name__ == '__main__':
     user_a = Cart()
     user_a.add_product(pr_1, 5)
     user_a.add_product(pr_3, 6)
+    user_a.add_product(pr_2, 7)
+    user_a.add_product(pr_3, 6)
 
-    print(user_a)
-    for i in user_a:
+
+    x = user_a[:]
+    for i in x:
         print(i)
+
+    print('**********')
+    print(len(user_a))
+    print('**********')
+    y = user_a[3]
+    print(y)
+
+
+
+
