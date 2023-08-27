@@ -11,3 +11,5 @@ if __name__ == '__main__':
     user_a.add_product(pr_3, 6)
 
     print(user_a)
+    for i in user_a:
+        print(i)

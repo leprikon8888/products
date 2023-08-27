@@ -22,6 +22,14 @@ class Cart:
             summa += product.price * quantity
         return summa
 
+    def __getitem__(self, item):
+
+        ...
+
+    def __len__(self):
+        return len(self.products)
+
+
     def __str__(self):
 
         res = ''
