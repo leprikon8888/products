@@ -1,9 +1,30 @@
 from product import Product
+
+
+class CartIter:
+    def __init__(self, products, quantities):
+        self.__products = products
+        self.__quantities = quantities
+        self.index = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.index < len(self.__products):
+            self.index += 1
+            return self.__products[self.index - 1], self.__quantities[self.index - 1]
+        raise StopIteration()
+
+
 class Cart:
     def __init__(self):
         self.products = []
         self.quantities = []
-    def add_product(self, product: Product, quantity: int | float):
+
+    def add_product(self,
+                    product: Product,
+                    quantity: int | float):
         if not isinstance(product, Product):
             raise TypeError('Error in Product datatype')
         elif not isinstance(quantity, int | float):
@@ -12,10 +33,6 @@ class Cart:
             raise ValueError('Quantity must be > 0. But less or equal got.')
         self.products.append(product)
         self.quantities.append(quantity)
-
-
-
-
 
     def total(self):
         summa = 0
@@ -41,18 +58,15 @@ class Cart:
                 tmp.append(self.products[i])
             return tmp
 
-
-
-
-
     def __len__(self):
         return len(self.products)
 
 
-    def __str__(self):
+    def __iter__(self):
+        return CartIter(self.products, self.quantities)
 
+    def __str__(self):
         res = ''
         for product, quantity in zip(self.products, self.quantities):
             res += f'{product} x {quantity} = {product.price * quantity}$ \n'
         return res
-

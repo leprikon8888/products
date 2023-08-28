@@ -13,15 +13,10 @@ if __name__ == '__main__':
     user_a.add_product(pr_3, 6)
 
 
-    x = user_a[:]
-    for i in x:
-        print(i)
+    for item in user_a:
+        print(item)
 
-    print('**********')
-    print(len(user_a))
-    print('**********')
-    y = user_a[3]
-    print(y)
+    print(user_a[3])
 
 
 
